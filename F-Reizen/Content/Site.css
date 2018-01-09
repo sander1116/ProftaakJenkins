@@ -1,0 +1,176 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar .nav li a {
+    color: #f0ad4e !important;
+}
+/*om menu balk tekst te verkleuren*/
+/*.navbar .nav li a:hover {
+        color: #ea7507 !important;
+    }*/
+
+.navbar .nav li:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.hrzoekresultaten {
+    height: 1px;
+    color: #696969;
+    background-color: #696969;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    .pushdown {
+        margin-top: 70%;
+    }
+}
+
+.btn.btn-full {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn.btn-toggle {
+    border-color: dimgrey;
+    width: 50%;
+}
+
+
+    .btn.btn-toggle:not(.active) {
+        background-color: white;
+        color: dimgrey;
+    }
+
+
+.departureDate {
+    color: purple;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.departureDate:not(.active) {
+    color: blue;
+}
+
+/*Login pagina*/
+
+.form-signin input[type="text"] {
+    margin-bottom: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.vertical-offset-100 {
+    padding-top: 100px;
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.homeButtons {
+    opacity: 0.8;
+    padding: 10px;
+    position: absolute;
+    margin-left: 28%;
+    text-align: center;
+    margin-top: 24%;
+    z-index: 5;
+}
+
+@media (min-width: 768px) {
+    .homeButtons {
+        opacity: 0.8;
+        padding: 10px;
+        position: absolute;
+        margin-left: 37%;
+        text-align: center;
+        margin-top: 29%;
+        z-index: 5;
+    }
+}
+
+
+
+.homeButtons:hover{
+    opacity:2.0;
+}
+
+
+.snelzoeker {
+    width: 101vw;
+    margin-left: -5%;
+}
+@media (min-width: 992px) {
+    .snelzoeker {
+        position: fixed;
+        max-width: 21%;
+    }
+}
+
+
+
+.zoekresultatenopmaak {
+    margin-top: 16.5vw;
+    margin-right: -5%;
+}
+
+@media (min-width: 992px) {
+    .zoekresultatenopmaak {
+        margin-top: 16.5vw;
+        margin-right: 0%;
+    }
+}
+
+@media (min-width: 992px) {
+    .aantalaccomodaties {
+        margin-left: 43%
+    }
+}

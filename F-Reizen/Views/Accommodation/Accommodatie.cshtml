@@ -1,0 +1,345 @@
+﻿@model PresentationLayer.ViewModels.AccommodatieViewModel
+@{
+    ViewBag.Title = "Accommodatie";
+}
+
+<img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0">
+
+<div class="well">
+    <div class="row" style="margin-top: 17vw;">
+        <div class="col-md-4">
+            <img class="img-responsive" src="@Model.Accommodatie.Picture[0]" alt="accommodatieafbeelding 1">
+        </div>
+        <div class="col-md-4">
+            <img class="img-responsive" src="@Model.Accommodatie.Picture[1]" alt="accommodatieafbeelding 2">
+        </div>
+        <div class="col-md-4">
+            <img class="img-responsive" src="@Model.Accommodatie.Picture[2]" alt="accommodatieafbeelding 3">
+        </div>
+    </div>
+    <br />
+    @if (@Model.Accommodatie.DepartureDate.Count == 24)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <h2 id="titel">@Model.Accommodatie.Title</h2>
+                <p>@Model.Accommodatie.Description</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Vertrek Datums</h2>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered ">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Januari</th>
+                                    <th scope="col">Februari</th>
+                                    <th scope="col">Maart</th>
+                                    <th scope="col">April</th>
+                                    <th scope="col">Mei</th>
+                                    <th scope="col">Juni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[0].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[2].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[4].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[6].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[8].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[10].Date.ToShortDateString()</td>
+                                </tr>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[1].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[3].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[5].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[7].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[9].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[11].Date.ToShortDateString()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Juli</th>
+                                    <th scope="col">Augustus</th>
+                                    <th scope="col">September</th>
+                                    <th scope="col">October</th>
+                                    <th scope="col">November</th>
+                                    <th scope="col">December</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[12].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[14].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[16].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[18].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[20].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[22].Date.ToShortDateString()</td>
+                                </tr>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[13].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[15].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[17].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[19].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[21].Date.ToShortDateString()</td>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[23].Date.ToShortDateString()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <h2 id="titel">@Model.Accommodatie.Title</h2>
+                <p>@Model.Accommodatie.Description</p>
+            </div>
+            
+            <div class="col-md-6">
+                <h2>Vertrek Datums</h2>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered ">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Januari</th>                                   
+                                    <th scope="col">Maart</th>                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[0].Date.ToShortDateString()</td>                                  
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[4].Date.ToShortDateString()</td>
+                                   
+                                   
+                                </tr>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[1].Date.ToShortDateString()</td>                                 
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[5].Date.ToShortDateString()</td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[2].Date.ToShortDateString()</td>                                  
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[6].Date.ToShortDateString()</td>
+                              
+                                </tr>
+                                <tr>
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[3].Date.ToShortDateString()</td>                               
+                                    <td class="departureDate">@Model.Accommodatie.DepartureDate[7].Date.ToShortDateString()</td>                                 
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-2" style="padding-left: 0%; padding-right:0%;">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-warning btn-lg" style="min-width: 100%;" data-toggle="modal" data-target="#myModal">Reisgezelschap</button>
+        </div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="row">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Kies uw reisgezelschap</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div>
+                                @Html.HiddenFor(m => m.AantalKamers, new { @id = "Kamers"})
+                                @Html.HiddenFor(m => m.AantalKinderen, new { @id = "Kinderen" })
+                                <div class="container">
+                                    Aantal volwassenen
+                                    <br />
+                                    2
+                                    <br />
+                                    Aantal Kinderen
+                                    <div class="form-group">
+                                        <label class="radio-inline">
+                                            <input class="rButton1 radiobuttons" id="rButton1" type="radio" value="0" name="Kinderen"/>0
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="rButton2 radiobuttons" id="rButton2" type="radio" value="1" name="Kinderen"/>1
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="rButton3 radiobuttons" id="rButton3" type="radio" value="2" name="Kinderen"/>2
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    Aantal Kamers
+                                    <div class="form-group">
+                                        <label class="radio-inline">
+                                            <input class="rButton4" id="rButton4" type="radio" value="1" name="Kamers" />1
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="rButton5" id="rButton5" type="radio" value="2" name="Kamers" />2
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="rButton6" id="rButton6" type="radio" value="3" name="Kamers" />3
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default reisGezelschap" data-dismiss="modal">Opslaan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <h3 style="margin-top: 10px" id="price"> Prijs: € @(Model.Accommodatie.Volwasseneprijs * 2) </h3>
+        </div>
+        <div class="col-md-2" style="padding-left: 0%; padding-right:0%;">
+            <button type="button" class="btn btn-warning btn-lg boeken" , style="min-width: 100%;">Boeken</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/AccommodatieScript.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#Kinderen').prop('value', '@Model.AantalKinderen');
+        $('#Kamers').prop('value', '@Model.AantalKamers');
+
+        if ($('#Kinderen').val() == '0') {
+            $("#rButton1").prop('checked', true);
+            $("#rButton4").attr('disabled', false);
+            $("#rButton5").attr('disabled', true);
+            $("#rButton6").attr('disabled', true);
+        }
+        else if ($('#Kinderen').val() == '1') {
+            $("#rButton2").prop('checked', true);
+            $("#rButton4").attr('disabled', true);
+            $("#rButton5").attr('disabled', false);
+            $("#rButton6").attr('disabled', true);
+        }
+        else if ($('#Kinderen').val() == '2') {
+            $("#rButton3").prop('checked', true);
+            $("#rButton4").attr('disabled', true);
+            $("#rButton5").attr('disabled', false);
+            $("#rButton6").attr('disabled', false);
+        }
+        else {
+            $("#rButton1").prop('checked', true);
+            $("#rButton4").attr('disabled', false);
+            $("#rButton5").attr('disabled', true);
+            $("#rButton6").attr('disabled', true);
+        }
+        if ($('#Kamers').val() == '1') {
+            $("#rButton4").prop('checked', true);
+        }
+        else if ($('#Kamers').val() == '2' && $('#Kinderen').val() == '1') {
+            $("#rButton5").prop('checked', true);
+        }
+        else if ($('#Kamers').val() == '2' && $('#Kinderen').val() == '2') {
+            $("#rButton5").prop('checked', true);
+        }
+        else if ($('#Kamers').val() == '3') {
+            $("#rButton6").prop('checked', true);
+        }
+        else {
+            $("#rButton4").prop('checked', true);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("pageLoadPrice")",
+            success: function (msg) {
+                $("#price").text("Prijs: € " + msg.price);
+            }
+        });
+    });
+</script>
+
+<script>
+$('.departureDate').on('click', function () {
+    $('.departureDate.active').removeClass('active');
+    $(this).addClass('active');
+});
+
+var titelAccommodatie = "@Model.Accommodatie.Title";
+var kinderen = @Model.AantalKinderen;
+var kamers = @Model.AantalKamers;
+var datum;
+
+$('.departureDate').on('click',
+    function () {
+        kinderen = $("#Kinderen").val();
+        kamers = $("#Kamers").val();
+        datum = $(this).text();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("priceDate")",
+            data: { titel: titelAccommodatie, datum2: datum, kinderen2: kinderen, kamers2: kamers },
+            success: function (msg) {
+                datumPrijs = msg.price;
+                $("#price").text("Prijs: € " + msg.price);
+            }
+        });
+    });
+
+
+$('.boeken').on('click',
+    function () {
+        var kamer = $("#Kamers").val();
+        var kinderen = $("#Kinderen").val();
+        var datum2 = datum;
+        var titel = "@Model.Accommodatie.Title";
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("boekenAccommodatie")",
+            data: { kamer: kamer, kinderen: kinderen, datum: datum2, titel: titel },
+            success: function (data) {
+                window.location.href = data;
+            }
+        });
+        });
+
+    $('.reisGezelschap').on('click',
+    function () {
+        var titelAccommodatie = $("#titel").text();
+        var aantalKinderen = $('input[name=Kinderen]:checked').val();
+        var aantalKamers = $('input[name=Kamers]:checked').val();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("reisGezelschap")",
+            data: { titel: titelAccommodatie, kinderen2: aantalKinderen, kamers2: aantalKamers, datum2: datum },
+            success: function (msg) {
+                $("#price").text("Prijs: € " + msg.price);
+                $("#Kamers").val(aantalKamers);
+                $("#Kinderen").val(aantalKinderen);
+            }
+        });
+    });
+</script>

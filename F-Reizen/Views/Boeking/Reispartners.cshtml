@@ -1,0 +1,101 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/BonStyle.css">
+
+<div><img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0"></div>
+
+<div class="form-horizontal" style="margin-top: 17vw;">
+
+
+
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Boekingsproces</legend>
+
+        @{
+            Html.RenderPartial("_StepNavigation");
+        }
+
+        @using (Html.BeginForm("Factuur", "Boeking", FormMethod.Post))
+        {
+            <div class="container well" id="boekingForm">
+                
+                @{
+                    for (int i = 0; i < Model.MainCustomer.Boeking.AmountTravelers + 1; i++)
+                    {
+                        <div class="well" style="background-color:white; border-color:black">
+                            <p>Reispartner @(i+1)</p>
+                        <div class="form-group" style="border:thin">
+                            <label class="col-md-4 control-label" for="Aanhef">Aanhef</label>
+                            <div class="col-md-4">
+                                <label class="input-sm" for="Aanhef">
+                                    @Html.RadioButtonFor(m => Model.Travelpartner[i].Preamble, Model.Dhr, new { @checked = "true" })
+                                    Dhr
+                                </label>
+                                <label class="input-sm" for="Aanhef">
+                                    @Html.RadioButtonFor(m => Model.Travelpartner[i].Preamble, Model.Mvr)
+                                    Mvr
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Voornaam">Voornaam</label>
+                            <div class="col-md-4">
+                                <label class="input-sm" for="Voornaam">
+                                    @Html.TextBoxFor(m => Model.Travelpartner[i].Firstname, new { @required = "true" })
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Achternaam">Achternaam</label>
+                            <div class="col-md-4">
+                                <label class="input-sm" for="Achternaam">
+                                    @Html.TextBoxFor(m => Model.Travelpartner[i].Lastname, new { @required = "true" })
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Geboortedatum">Geboortedatum</label>
+                            <div class="col-md-4">
+                                <label class="input-sm" for="Geboortedatum">
+                                    @Html.TextBoxFor(m => Model.Travelpartner[i].DateOfBirth, new { @class = "form-control", @style = "min-width:100%;", @type = "date", @value = DateTime.Now.ToString("yyyy-MM-dd"), @required = "true" })
+                                </label>
+                            </div>
+                        </div>
+                </div>
+                    }
+                }
+
+                
+
+                <!-- Button -->
+                <div class="form-group" style="float:right; margin-right:4%">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="submit">Volgende</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @{
+            Html.RenderPartial("_Bon");
+        }
+
+
+
+    </fieldset>
+</div>
+
+
+
+

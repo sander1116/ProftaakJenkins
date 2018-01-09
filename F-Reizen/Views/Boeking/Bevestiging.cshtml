@@ -1,0 +1,41 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+@{
+    ViewBag.Title = "Factuur";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/BonStyle.css">
+
+<div><img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0"></div>
+
+<div class="form-horizontal" style="margin-top: 17vw;">
+
+    <fieldset>
+        <div class="container well" id="boekingForm">
+            @{ Html.RenderPartial("_Factuur", Model); }
+        </div>
+        
+        
+            <div style="text-align:center">
+                <h3>Uw boeking is succesvol geplaatst.</h3>
+                <div style="float: left; margin-left: 10%">
+                    @using (Html.BeginForm("Download", "Boeking"))
+                    {
+                        <button class="btn btn-primary" type="submit" name="Download" style="margin:auto">
+                            Download
+                        </button>
+                    }
+                </div>
+                
+                <div style="float: right; margin-right: 10%">
+                    @using (Html.BeginForm("Bevestiging", "Boeking", FormMethod.Post))
+                    {
+                        <button class="btn btn-primary" type="submit" name="Home" style="margin:auto">
+                            Home
+                        </button>
+                    }
+                </div>
+            </div>
+
+        
+    </fieldset>
+</div>

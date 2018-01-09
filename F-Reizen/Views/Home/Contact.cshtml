@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<address>
+    Fontys Reizen<br />
+    Prof. Goossenlaan 1, 5022 DM Tilburg<br />
+    <abbr title="Phone">P:</abbr>
+    +06 27869887
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:F-ReizenSupport@gmail.com">F-ReizenSupport@gmail.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:F-ReizenMarketing@gmail.com">F-ReizenMarketing@gmail.com</a>
+</address>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByy3hunzmiS6fvjqzSnPbQaEjSg91t_1w&callback=initMap">
+</script>
+<div id="map"></div>
+<script>
+  function initMap() {
+    var locatie = { lat: 51.539286, lng: 5.077121 };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: locatie
+    });
+    var marker = new google.maps.Marker({
+      position: locatie,
+      map: map
+    });
+  }</script>
+<style>
+    #map {
+        height: 200px;
+        width: 50%;
+    }
+</style>

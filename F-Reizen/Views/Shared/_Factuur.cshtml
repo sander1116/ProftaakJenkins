@@ -1,0 +1,411 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+
+    <h3><b>Factuur</b></h3>
+
+    <hr style="border-top: dashed 1px" ; />
+
+    <h4><b>Bestemming: @Model.MainCustomer.Boeking.Accommodatie.Title</b></h4>
+    <h4>Vertrekdatum: @Model.MainCustomer.Boeking.Departure.ToShortDateString()</h4>
+
+    <table style="width:100%; text-align:left">
+
+        <tr>
+            <th style="width:60%">Hoofdboeker</th>
+            <th>Gegevens</th>
+        </tr>
+        <tr>
+            <td>Naam</td>
+            @{
+                try
+                {
+                    string naam;
+                    if (Model.MainCustomer.Preamble.ToString() != "unknown")
+                    {
+                        naam = Model.MainCustomer.Preamble + ". " + Model.MainCustomer.Firstname + " " + Model.MainCustomer.Lastname;
+                    }
+                    else
+                    {
+                        naam = Model.MainCustomer.Firstname + " " + Model.MainCustomer.Lastname;
+                    }
+                    <td>@naam</td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+        <tr>
+            <td>Geboortedatum</td>
+            @{
+                try
+                {
+            <td>
+              @Model.MainCustomer.DateOfBirth.ToShortDateString()
+            </td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+        <tr>
+            <td>Adres</td>
+            @{
+                try
+                {
+                    <td>
+                        @Model.MainCustomer.Adress
+                    </td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+        <tr>
+            <td>Woonplaats</td>
+            @{
+                try
+                {
+                    <td>
+                        @Model.MainCustomer.Residence
+                    </td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+        <tr>
+            <td>Telefoonnummer</td>
+            @{
+                try
+                {
+                    <td>
+                        @Model.MainCustomer.Telephonenumber
+                    </td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+        <tr>
+            <td>Email</td>
+            @{
+                try
+                {
+                    <td>
+                        @Model.MainCustomer.Email
+                    </td>
+                }
+                catch
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+
+
+
+
+        @{
+            for (int i = 0; i < Model.Travelpartner.Count; i++)
+            {
+
+                <tr><td> </td><td>  </td></tr>
+
+                <tr>
+                    @{
+                        if (i == 0)
+                        {
+                            <th>Partner</th>
+                        }
+                        else
+                        {
+                            <th>Kind @i</th>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{
+                        try
+                        {
+                            <td>Naam</td>
+                            string naam;
+                            if (Model.Travelpartner[i].Preamble.ToString() != "unknown")
+                            {
+                                naam = Model.Travelpartner[i].Preamble + ". " + Model.Travelpartner[i].Firstname + " " + Model.Travelpartner[i].Lastname;
+                            }
+                            else
+                            {
+                                naam = Model.Travelpartner[i].Firstname + " " + Model.Travelpartner[i].Lastname;
+                            }
+                            <td>@naam</td>
+                        }
+                        catch
+                        {
+                            <td>-</td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    <td>Geboortedatum</td>
+                    @{
+                        try
+                        {
+                    <td>
+                      @Model.MainCustomer.DateOfBirth.ToShortDateString()
+                    </td>
+                        }
+                        catch
+                        {
+                            <td>-</td>
+                        }
+                    }
+                </tr>
+            }
+        }
+    </table>
+
+    <hr style="border-top: dashed 1px" ; />
+
+    <table style="width:100%; text-align:left">
+        <tr>
+            <th style="width:60%">Beschrijving</th>
+            <th>Aantal</th>
+            <th>Prijs</th>
+        </tr>
+        @{
+            decimal tempTotaalPrijs = 0;
+            try
+            {
+                <tr>
+                    <td>Volwassenen</td>
+                    @{
+                        try
+                        {
+                            <td>2</td>
+
+                            decimal VP = Model.MainCustomer.Boeking.GetAdultPrice();
+                            tempTotaalPrijs = tempTotaalPrijs + VP;
+
+                            <td>€@VP.ToString("N2")</td>
+                        }
+                        catch
+                        {
+                            <td>-</td>
+                                    <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr>
+                    <td>Kinderen</td>
+                    @{
+                        if (Model.MainCustomer.Boeking.AmountTravelers != 0)
+                        {
+                            <td>@Model.MainCustomer.Boeking.AmountTravelers</td>
+
+                            decimal KP = Model.MainCustomer.Boeking.GetChildrenPrice();
+                            tempTotaalPrijs = tempTotaalPrijs + KP;
+
+                            <td>€@KP.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                                    <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr>
+                    <td>Kamers</td>
+                    @{
+                        if (Model.MainCustomer.Boeking.Rooms != 0)
+                        {
+                            <td>@Model.MainCustomer.Boeking.Rooms</td>
+                            decimal kamerprijs;
+                            if (@Model.MainCustomer.Boeking.Rooms == 3)
+                            {
+                                kamerprijs = 50;
+                                tempTotaalPrijs = tempTotaalPrijs + 50;
+                            }
+                            else
+                            {
+                                kamerprijs = 0;
+                            }
+                            <td>€@kamerprijs.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                            <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr>
+                    @{
+                        if (Model.MainCustomer.Boeking.Transport.OwnTransport == false)
+                        {
+                            <td>Vliegtickets @Model.MainCustomer.Boeking.Transport.Airport</td>
+
+                            int totalTravelers = Model.MainCustomer.Boeking.AmountTravelers + 2;
+
+                            <td>@totalTravelers</td>
+
+                            decimal price = (150 * (Model.MainCustomer.Boeking.AmountTravelers + 2));
+                            tempTotaalPrijs = tempTotaalPrijs + price;
+
+                            <td>€@price.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>Eigen vervoer</td>
+                                    <td>-</td>
+                                        <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr>
+                    <td>Reisverzekering</td>
+                    <td>-</td>
+                    @{
+                        if (Model.MainCustomer.Boeking.TravelInsurance)
+                        {
+                            decimal verzekeringsprijs = 20;
+                            <td>€@verzekeringsprijs.ToString("N2")</td>
+                            tempTotaalPrijs = tempTotaalPrijs + 20;
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr>
+                    <td>Annuleringsverzekering</td>
+                    <td>-</td>
+                    @{
+                        if (Model.MainCustomer.Boeking.CancellationInsurance)
+                        {
+                            decimal annuleringsprijs = 30;
+                            <td>€@annuleringsprijs.ToString("N2")</td>
+                            tempTotaalPrijs = tempTotaalPrijs + 30;
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                    }
+                </tr>
+                        }
+                        catch { }
+        }
+
+        @{
+            try
+            {
+                <tr style="color: gray; font-style: italic">
+                    <td>Reserveringskosten</td>
+                    <td>-</td>
+                    @{ decimal reserveringskosten = 18; }
+                    <td>€@reserveringskosten.ToString("N2")</td>
+                </tr>
+            }
+            catch { }
+        }
+
+        @{
+            try
+            {
+                <tr style="color: gray; font-style: italic">
+                    <td>Calamiteitenfonds</td>
+                    <td>-</td>
+                    @{ decimal calamiteitenfonds = 2.5M; }
+                    <td>€@calamiteitenfonds.ToString("N2")</td>
+                </tr>
+            }
+            catch { }
+        }       
+        
+        @{
+            try
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <tr style="color: gray; font-style: italic">
+                        <td>Reisagent korting</td>
+                        <td>5%</td>
+                        @{
+                            decimal kortingPrijs = tempTotaalPrijs / 20;
+                            tempTotaalPrijs = tempTotaalPrijs - kortingPrijs;
+                        }
+                        <td>- €@kortingPrijs.ToString("N2")</td>
+                    </tr>
+                                }
+                            }
+                            catch { }
+        }
+        
+
+        <tr><td> </td><td> </td><td>  </td></tr>
+
+        @{
+            <tr style="font-weight: bold">
+                <td>Totaalprijs</td>
+                <td></td>
+                @{
+                    try
+                    {
+                        tempTotaalPrijs = tempTotaalPrijs + 20.5M;
+
+                        <td>€@tempTotaalPrijs.ToString("N2")</td>
+                    }
+                    catch
+                    {
+                        <td>-</td>
+                    }
+                }
+            </tr>
+        }
+    </table>

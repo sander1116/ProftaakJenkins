@@ -1,0 +1,80 @@
+﻿@using F_Reizen.Models
+@model PresentationLayer.ViewModels.ZoekresultatenViewModel
+@{
+  ViewBag.Title = "Zoekresultaten";
+}
+
+<img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: fixed;float: left;left: 0; margin-top: 0; padding-top: 0; z-index: 3">
+
+
+  <div class="zoekresultatenopmaak">
+    @using (Html.BeginForm("Zoekresultaten", "Accommodation"))
+    {
+      <div class="container well snelzoeker">
+        @Html.HiddenFor(m => m.season, new { @class = "submit", @id = "Id" })
+        <div class="btn-group " style="margin-top: 10px; width: 100%; margin-bottom: 10px;">
+          <button type="button" id="zomer" class="btn btn-danger btn-toggle submit">Zomer</button>
+          <button type="button" id="winter" class="btn btn-info btn-toggle submit">Winter</button>
+        </div>
+        <br />
+        @Html.DropDownListFor(m => m.land, new SelectList(Model.landen), "Kies uw bestemming", new { @class = "form-control submit", @style = "margin-top:10px; margin-bottom:10px; min-width:100%;", @id = "landen" })
+        <br />
+        @Html.TextBoxFor(m => m.date, new { @class = "form-control submit", @style = "margin-top:10px; margin-bottom:10px; min-width:100%;", @type = "month", @id = "date" })
+        <br />
+        <button type="submit" style="margin-top: 10px; margin-bottom: 10px; width: 100%;" name="" class="btn btn-warning">Zoeken</button>
+      </div>
+    }
+
+  @if (Model.gefilterdAccommodaties.Count == 0)
+  {
+    <h1 style="margin-left:43%">Er zijn geen accommodaties met de ingevulde criteria beschikbaar.</h1>
+  }
+  else
+  { <h1 class="aantalaccomodaties">Aantal gevonden accommodaties: @Model.gefilterdAccommodaties.Count</h1>}
+  @foreach (Accommodatie accommodatie in Model.gefilterdAccommodaties)
+  {
+    <div class="row" style="margin-right: 0px !important;">
+      <div class="col-md-4"></div>
+      <div class="col-md-8 well">
+        <div class="col-md-4">
+          <img class="img-responsive" style="margin-top: 10px; margin-bottom: 10px; min-width: 100%;" src="@accommodatie.Picture[0]" alt="Zomer">
+        </div>
+        <div class="col-md-4" style="margin-top: 1%">
+          <b>@accommodatie.Title</b>
+          <ul style="padding-left: 17px;">
+            @foreach (string korteBeschrijving in accommodatie.KorteBeschrijving)
+            {
+              <li>@korteBeschrijving</li>
+            }
+          </ul>
+          <hr class="hrzoekresultaten" />
+          <b>Vertrekdatums</b>
+          <ul style="padding-left: 17px;">
+            @{ int i = 0; }
+            @foreach (DateTime date in accommodatie.DepartureDate)
+            {
+              if (date >= Model.date && i != 3)
+              {
+                <li>@Html.ActionLink(date.Date.ToShortDateString(), "DatumBoeking", new { datum = date.Date.ToString("yyyy-MM-dd"), accommodatieTitel = accommodatie.Title })</li>
+                i++;
+              }
+            }
+
+            </ul>
+
+          </div>
+          <div class="col-md-4" style="margin-top: auto">
+            @*<button name="" class="btn btn-warning pushdown btn-full">Zie meer...</button>*@
+            @Html.ActionLink("Zie meer...", "AccommodatiePagina", "Accommodation", new { title = accommodatie.Title }, new { @class = "btn btn-warning pushdown btn-full" })
+            @*<button style="width: 100%;" class="btn btn-warning">Boek</button>*@
+            @Html.ActionLink("Boek", "boekenZoekresultaten", "Accommodation", new { title = accommodatie.Title, datum = Model.date.Date.ToString("yyyy-MM-dd") }, new { @class = "btn btn-warning", style = "width: 100%" })
+          </div>
+        </div>
+      </div>
+      <br />
+    }
+  </div>
+
+<script src="~/Scripts/ZoekResultatenScript.js"></script>
+
+

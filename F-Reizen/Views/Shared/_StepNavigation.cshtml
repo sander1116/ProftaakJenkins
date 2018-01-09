@@ -1,0 +1,41 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/StepNavigation.css">
+<div>
+<div class="container">
+    <div class="row" style="height:100px;">
+        <section>
+            <div class="wizard">
+                <div class="wizard-inner">
+                    <div class="connecting-line"></div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        @{
+                            for (int i = 1; i < 5; i++)
+                            {
+                                if (ViewBag.StepNavIndex == i)
+                                {
+                                    <li role="presentation" class="active">
+                                        <a data-toggle="tab" role="tab" title="Step @i">
+                                            <span class="round-tab">
+                                                @i
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li role="presentation">
+                                        <a data-toggle="tab" role="tab" title="Step @i">
+                                            <span class="round-tab">
+                                                @i
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</div>

@@ -1,0 +1,127 @@
+﻿@using F_Reizen.Models
+@model PresentationLayer.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("Zomer Vakanties", "InspiratieVakanties", "Accommodation", new { season = "1" }, new { @class = "homeButtons btn btn-danger"})
+            <img class="img-responsive" style="margin-bottom:10px; min-width:100%;" src="@Url.Content("~/images/zomer.jpg")" alt="Home" />
+        </div>
+        <div class="col-md-6">
+            @Html.ActionLink("Winter Vakanties", "InspiratieVakanties", "Accommodation", new { season = "2" }, new { @class = "homeButtons btn btn-info"})
+            <img class="img-responsive" style="min-width:100%;" src="@Url.Content("~/images/sneeuw.jpg")" alt="Home" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <img class="img-responsive" src="@Url.Content("~/images/Inspiratie2.jpg")" alt="Famous" />
+        </div>
+    </div>
+</div>
+@*@Model.Accommodatie.Picture[0]*@
+<br />
+@using (Html.BeginForm("Zoekresultaten", "Accommodation"))
+            {
+    <div class="container well">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.HiddenFor(m => m.season, new { @id = "Id"})
+                <div class="btn-group " style="margin-top: 10px; width: 100%; margin-bottom: 10px;">
+                    <button type="button" id="zomer" class="btn btn-danger btn-toggle">Zomer</button>
+                    <button type="button" id="winter" class="btn btn-info btn-toggle">Winter</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.land, new SelectList(Model.landen), "Kies uw bestemming", new { @class = "form-control", @style = "margin-top:10px; margin-bottom:10px; min-width:100%;"})
+            </div>
+            <div class="col-md-3">
+                @*<input class="form-control" style="margin-top:10px; margin-bottom:10px; min-width:100%;" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" id="example-datetime-local-input">*@
+                @Html.TextBoxFor(m => m.date, new { @class = "form-control", @style = "margin-top:10px; margin-bottom:10px; min-width:100%;", @type = "month" })
+            </div>
+            <div class="col-md-3">
+                <button type="submit" style="margin-top:10px; margin-bottom:10px; width:100%;" name="" class="btn btn-warning">Zoeken</button>
+            </div>
+        </div>
+    </div>
+}
+<div style="width:100%;">
+    <hr />
+    <h2>Populairste accommodaties:</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        @{
+            int i = 0;
+        }
+        @foreach (Accommodatie accommodatie in Model.accommodaties)
+        {
+            i = i + 1;
+            if (i == 1)
+            {
+                <div class="col-md-6" style="padding-left:0px;">
+                    <div class="col-md-12 well">
+                        <div class="col-md-4">
+                            <img class="img-responsive" style="margin-top: 10px; margin-bottom: 10px; min-width: 100%;" src="@accommodatie.Picture[0]" alt="Zomer">
+                        </div>
+                        <div class="col-md-4" style="margin-top: 1%">
+                            <b>@accommodatie.Title</b>
+                            <ul style="padding-left: 17px;">
+                                @foreach (string korteBeschrijving in accommodatie.KorteBeschrijving)
+                                {
+                                    <li>@korteBeschrijving</li>
+                                }
+                            </ul>
+                            @*<hr class="hrzoekresultaten" />*@
+                        </div>
+                        <div class="col-md-4" style="margin-top: 45px">
+                            @*<button name="" class="btn btn-warning pushdown btn-full">Zie meer...</button>*@
+                            @Html.ActionLink("Zie meer...", "AccommodatiePagina", "Accommodation", new { title = @accommodatie.Title }, new { @class = "btn btn-warning btn-full" })
+                            @*<button style="width: 100%;" class="btn btn-warning">Boek</button>*@
+                            @Html.ActionLink("Boek", "boekenZoekresultaten", "Accommodation", new { title = @accommodatie.Title }, new { @class = "btn btn-warning", style = "width: 100%" })
+                        </div>
+                    </div>
+                </div>
+            }
+            if (i == 2)
+            {
+                <div class="col-md-6" style="padding-right:0px;">
+                    <div class="col-md-12 well">
+                        <div class="col-md-4">
+                            <img class="img-responsive" style="margin-top: 10px; margin-bottom: 10px; min-width: 100%;" src="@accommodatie.Picture[0]" alt="Zomer">
+                        </div>
+                        <div class="col-md-4" style="margin-top: 1%">
+                            <b>@accommodatie.Title</b>
+                            <ul style="padding-left: 17px;">
+                                @foreach (string korteBeschrijving in accommodatie.KorteBeschrijving)
+                                {
+                                    <li>@korteBeschrijving</li>
+                                }
+                            </ul>
+                            @*<hr class="hrzoekresultaten" />*@
+                        </div>
+                      <div class="col-md-4" style="margin-top: 45px">
+                        @*<button name="" class="btn btn-warning pushdown btn-full">Zie meer...</button>*@
+                        @Html.ActionLink("Zie meer...", "AccommodatiePagina", "Accommodation", new { title = @accommodatie.Title }, new { @class = "btn btn-warning btn-full" })
+                        @*<button style="width: 100%;" class="btn btn-warning">Boek</button>*@
+                        @Html.ActionLink("Boek", "boekenZoekresultaten", "Accommodation", new { title = @accommodatie.Title }, new { @class = "btn btn-warning", style = "width: 100%" })
+                      </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>
+
+<script>
+  $(window).ready(function() { $('#Id').val("") });
+</script>

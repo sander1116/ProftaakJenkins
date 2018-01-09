@@ -1,0 +1,44 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+@{
+    ViewBag.Title = "Factuur";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/BonStyle.css">
+
+<div><img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0"></div>
+
+<div class="form-horizontal" style="margin-top: 17vw;">
+
+
+
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Boekingsproces</legend>
+
+        @{
+            Html.RenderPartial("_StepNavigation");
+
+
+
+            <div class="container well" id="boekingForm">
+               @{
+                   Html.RenderPartial("_Factuur", Model);
+
+                   using (Html.BeginForm("Bevestiging", "Boeking", FormMethod.Get))
+                   {
+                    <div class="form-group" style="float:right; margin-right:4%; margin-top:10px;">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" type="submit">Boek</button>
+                        </div>
+                    </div>
+                   }
+            }
+            </div>
+            
+            Html.RenderPartial("_Bon");
+          }
+
+</fieldset>
+</div>

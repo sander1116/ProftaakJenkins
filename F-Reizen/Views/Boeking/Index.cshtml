@@ -1,0 +1,234 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+@{
+  ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/BonStyle.css">
+
+<script>
+    var dates = new string[];
+    var model = new Date[];
+    model = @Model.MainCustomer.Boeking.Accommodatie.DepartureDate;
+    for (var i = 0; i < 24; i++)
+    {
+      dates[i] = model[i].ToShortDateString()
+    }
+    document.getElementById("departureDate").innerHTML = dates;
+</script>
+
+<div><img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0"></div>
+
+<div class="form-horizontal" style="margin-top: 17vw;">
+
+
+
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Boekingsproces</legend>
+
+    @{
+      Html.RenderPartial("_StepNavigation");
+    }
+
+    @using (Html.BeginForm("Persoonsgegevens", "Boeking", FormMethod.Post))
+    {
+      <div class="container well" id="boekingForm">
+
+        @Html.HiddenFor(m => Model.MainCustomer.Boeking.AmountTravelers, new { @id = "AmountTravelers"})
+        @Html.HiddenFor(m => Model.MainCustomer.Boeking.Rooms, new { @id = "Rooms"})
+        <div class="form-group">
+          <label class="col-md-4 control-label">Aantal kinderen</label>
+          <div class="col-md-4">
+            <label class="radio-inline">
+              <input class="rButton1 radiobuttons" type="radio" value="0" name="Kinderen" />0
+            </label>
+            <label class="radio-inline">
+              <input class="rButton2 radiobuttons" type="radio" value="1" name="Kinderen" />1
+            </label>
+            <label class="radio-inline">
+              <input class="rButton3 radiobuttons" type="radio" value="2" name="Kinderen" />2
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label">Aantal kamers</label>
+          <div class="col-md-4">
+            <label class="radio-inline">
+              <input class="rButton4" type="radio" value="1" name="Kamers" />1
+            </label>
+            <label class="radio-inline">
+              <input class="rButton5" type="radio" value="2" name="Kamers" />2
+            </label>
+            <label class="radio-inline">
+              <input class="rButton6" type="radio" value="3" name="Kamers" />3
+            </label>
+          </div>
+        </div>
+
+          <div style="height:15px;"></div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Vertrekdatum">Vertrekdatum</label>
+          <div class="col-md-4">
+            <label for="Vertrekdatum">
+              <select name="MainCustomer.Boeking.Departure" class="form-control" id="departureDate" style="min-width:100%;" required="true" data-val-required="Het veld Departure is vereist." data-val="true" data-val-date="The field Departure must be a date.">
+                <option value="">Selecteer een vertrekdatum</option>
+                @foreach (DateTime dt in Model.MainCustomer.Boeking.Accommodatie.DepartureDate)
+                {
+                  if (Model.MainCustomer.Boeking.Departure == dt)
+                  {
+                    <option selected="selected">
+                      @dt.ToShortDateString()
+                    </option>
+                  }
+                  else
+                  {
+                    <option>
+                      @dt.ToShortDateString()
+                    </option>
+                  }
+                }
+              </select>
+            </label>
+          </div>
+        </div>
+
+        
+
+        @{
+
+          List<string> locaties = new List<string>() { "Eigen vervoer", "Vliegen vanaf Schiphol", "Vliegen vanaf Eindhoven", "Vliegen vanaf Rotterdam" };
+
+        }
+
+        <!-- Select Multiple -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Vliegvelden">Vervoer</label>
+          <div class="col-md-4">
+
+            @Html.DropDownListFor(m => m.MainCustomer.Boeking.Transport.Airport, new SelectList(locaties), "Reismogelijkheden", new { @class = "form-control", @style = "min-width:100%; font-weight:bold", @required = "true" })
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Vervoer">Reisverzekering</label>
+          <div class="col-md-4">
+            <label class="radio-inline" for="Vervoer-0">
+              @Html.RadioButtonFor(m => Model.MainCustomer.Boeking.TravelInsurance, true)
+              Ja
+            </label>
+            <label class="radio-inline" for="Vervoer-1">
+              @Html.RadioButtonFor(m => Model.MainCustomer.Boeking.TravelInsurance, false)
+              Nee
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Vervoer">Annuleringsverzekering</label>
+          <div class="col-md-4">
+            <label class="radio-inline" for="Vervoer-0">
+              @Html.RadioButtonFor(m => Model.MainCustomer.Boeking.CancellationInsurance, true)
+              Ja
+            </label>
+            <label class="radio-inline" for="Vervoer-1">
+              @Html.RadioButtonFor(m => Model.MainCustomer.Boeking.CancellationInsurance, false)
+              Nee
+            </label>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group" style="float:right; margin-right:4%">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4">
+            <button class="btn btn-primary" type="submit">Volgende</button>
+          </div>
+        </div>
+      </div>
+          }
+
+
+    @{
+      Html.RenderPartial("_Bon", Model);
+    }
+
+
+
+  </fieldset>
+</div>
+<script>
+    $(document).ready(function () {
+        if ($('#AmountTravelers').val() == '0') {
+            $(".rButton1").prop('checked', true);
+            $(".rButton4").attr('disabled', false);
+            $(".rButton5").attr('disabled', true);
+            $(".rButton6").attr('disabled', true);
+        }
+        else if ($('#AmountTravelers').val() == '1') {
+            $(".rButton2").prop('checked', true);
+            $(".rButton4").attr('disabled', true);
+            $(".rButton5").attr('disabled', false);
+            $(".rButton6").attr('disabled', true);
+        }
+        else if ($('#AmountTravelers').val() == '2') {
+            $(".rButton3").prop('checked', true);
+            $(".rButton4").attr('disabled', true);
+            $(".rButton5").attr('disabled', false);
+            $(".rButton6").attr('disabled', false);
+        }
+        else {
+            $(".rButton1").prop('checked', true);
+            $(".rButton4").attr('disabled', false);
+            $(".rButton5").attr('disabled', true);
+            $(".rButton6").attr('disabled', true);
+        }
+        if ($('#Rooms').val() == '1') {
+            $(".rButton4").prop('checked', true);
+        }
+        else if ($('#Rooms').val() == '2' && $('#AmountTravelers').val() == '1') {
+            $(".rButton5").prop('checked', true);
+        }
+        else if ($('#Rooms').val() == '2' && $('#AmountTravelers').val() == '2') {
+            $(".rButton5").prop('checked', true);
+        }
+        else if ($('#Rooms').val() == '3') {
+            $(".rButton6").prop('checked', true);
+        }
+        else {
+            $(".rButton4").prop('checked', true);
+        }
+    });
+</script>
+
+<script>
+    $(".radiobuttons").change(function () {
+      if ($(".rButton1").is(':checked')) {
+        $(".rButton4").attr('disabled', false);
+        $(".rButton5").attr('disabled', true);
+        $(".rButton6").attr('disabled', true);
+        $(".rButton4").prop('checked', true);
+      }
+      if ($(".rButton2").is(':checked')) {
+        $(".rButton4").attr('disabled', true);
+        $(".rButton5").attr('disabled', false);
+        $(".rButton6").attr('disabled', true);
+        $(".rButton5").prop('checked', true);
+      }
+      if ($(".rButton3").is(':checked')) {
+        $(".rButton4").attr('disabled', true);
+        $(".rButton5").attr('disabled', false);
+        $(".rButton6").attr('disabled', false);
+        $(".rButton5").prop('checked', true);
+      }
+    }
+    );
+    $(".radiobuttons").change(function() {
+      $("#Rooms").val($('input[name=Kamers]:checked').val());
+      $("#AmountTravelers").val($('input[name=Kinderen]:checked').val());
+    });
+</script>
+
+

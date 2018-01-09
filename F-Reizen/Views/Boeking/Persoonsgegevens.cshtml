@@ -1,0 +1,128 @@
+﻿@model PresentationLayer.ViewModels.BoekingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/BonStyle.css">
+
+<div><img class="img-responsive" src="~/Images/bannerafbeelding.jpg" alt="banner" style="width: 100vw;position: absolute;float: left;left: 0; margin-top: 0; padding-top: 0"></div>
+
+<div class="form-horizontal" style="margin-top: 17vw;">
+
+
+
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Boekingsproces</legend>
+
+        @{
+            Html.RenderPartial("_StepNavigation");
+        }
+
+        @using (Html.BeginForm("Reispartners", "Boeking", FormMethod.Post))
+        {
+            <div class="container well" id="boekingForm">
+
+
+                <!-- Multiple Radios (inline) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Aanhef">Aanhef</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Aanhef">
+                            @Html.RadioButtonFor(m => m.MainCustomer.Preamble, Model.Dhr, new { @checked = "true" })
+                            Dhr
+                        </label>
+                        <label class="input-sm" for="Aanhef">
+                            @Html.RadioButtonFor(m => m.MainCustomer.Preamble, Model.Mvr)
+                            Mvr
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Voornaam">Voornaam</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Voornaam">
+                            @Html.TextBoxFor(m => m.MainCustomer.Firstname, new { @required = "true" })                            
+                        </label>                       
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Achternaam">Achternaam</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Achternaam">
+                            @Html.TextBoxFor(m => m.MainCustomer.Lastname, new { @required = "true" })
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Geboortedatum">Geboortedatum</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Geboortedatum">
+                            @Html.TextBoxFor(m => m.MainCustomer.DateOfBirth, new { @class = "form-control", @style = "min-width:100%;", @type = "date", @value = DateTime.Now.ToString("yyyy-MM-dd"), @required = "true" })
+                        </label>
+                    </div>
+                </div>
+
+                <div style="height:7px"></div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Adres">Adres</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Adres">
+                            @Html.TextBoxFor(m => m.MainCustomer.Adress, new { @required = "true" })
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Woonplaats">Woonplaats</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Woonplaats">
+                            @Html.TextBoxFor(m => m.MainCustomer.Residence, new { @required = "true" })
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Telefoonnummer">Telefoonnummer</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Telefoonnummer">
+                            @Html.TextBoxFor(m => m.MainCustomer.Telephonenumber, new { @required = "true" })
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Email">Email</label>
+                    <div class="col-md-4">
+                        <label class="input-sm" for="Email">
+                            @Html.TextBoxFor(m => m.MainCustomer.Email, new { @required = "true" })
+                        </label>
+                    </div>
+                </div>        
+                
+
+                <!-- Button -->
+                <div class="form-group" style="float:right; margin-right:4%">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="submit">Volgende</button>
+                    </div>
+                </div>
+            </div>
+                    }
+
+
+        @{
+            Html.RenderPartial("_Bon");
+        }
+
+
+
+    </fieldset>
+</div>

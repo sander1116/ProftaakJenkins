@@ -1,0 +1,32 @@
+﻿
+@media (max-width: 991px) {
+    #bon {
+        float: left;
+        width: 100%;
+    }
+
+    h4 {
+        font-style: italic;
+    }
+
+    #boekingForm {
+        width: 100%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    #bon {
+        float: right;
+        width: 35%;
+    }
+
+    #boekingForm {
+        width: 60%;
+        float: left;
+    }
+}
+
+#bon {
+    text-align: center;
+}
